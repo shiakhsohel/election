@@ -2,7 +2,7 @@
 
 const express = require('express');
 const userRouter = express.Router();
-const userController = require('../controllers/userController');
+const userController = require('../src/v1/voter/controllers/userController');
 
 // Register a new user
 userRouter.post('/register', userController.registerUser);

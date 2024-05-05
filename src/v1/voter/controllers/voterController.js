@@ -1,6 +1,6 @@
 // controllers/voterController.js
 
-const voterRepository = require('../../../../repositories/voterRepository');
+const voterRepository = require('../../../../src/v1/voter/repositories/voterRepository');
 
 // Custom validation function for gender
 const validateGender = (gender) => {
