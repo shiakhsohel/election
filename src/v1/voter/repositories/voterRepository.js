@@ -62,10 +62,46 @@ const searchVoter = async (searchString) => {
     }
 };
 
+// Function to retrieve all voters from the database
+const getAllVoters = async () => {
+    try {
+        // Fetch all voters from the database using the Voter model
+        const voters = await Voter.find(); // Assuming Voter is your Mongoose model for voters
+
+        return voters;
+    } catch (error) {
+        // Handle any errors that occur during database operation
+        throw new Error('Failed to fetch voters from the database');
+    }
+};
+
+
+// Function to retrieve all voters with pagination
+const getAllVotersWithPagination = async (offset, limit) => {
+    try {
+        // Fetch voters from the database with pagination
+        const voters = await Voter.find()
+            .skip(offset) // Skip the specified number of documents
+            .limit(limit); // Limit the number of documents returned
+
+        // Fetch total count of voters
+        const totalCount = await Voter.countDocuments();
+
+        return {
+            voters,
+            totalCount
+        };
+    } catch (error) {
+        // Handle any errors that occur during database operation
+        throw new Error('Failed to fetch voters from the database');
+    }
+};
+
+
 
 
 module.exports = {
     ensureVoterCollection,
     addVoter,  getVoterById,
-    updateVoter,deleteVoter,searchVoter
+    updateVoter,deleteVoter,searchVoter,getAllVoters,getAllVotersWithPagination
 };

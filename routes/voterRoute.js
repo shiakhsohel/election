@@ -16,5 +16,10 @@ router.delete('/deleteVoter', voterController.deleteVoter);
 // Universal search
 router.post('/searchVoter', voterController.searchVoter);
 
+// Get a voter by ID
+router.get('/voter/:id', voterController.getVoterById);
+
+// Route to get all voters
+router.get('/voters', voterController.getAllVoters);
 
 module.exports = router;

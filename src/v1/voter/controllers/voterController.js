@@ -102,6 +102,73 @@ const searchVoter = async (req, res, next) => {
     }
 };
 
+// Get a voter by ID
+const getVoterById = async (req, res, next) => {
+    try {
+        // Extract voter ID from request parameters
+        const voterId = req.params.id;
+
+        // Fetch voter from repository by ID
+        const voter = await voterRepository.getVoterById(voterId);
+
+        // Check if voter exists
+        if (!voter) {
+            return res.status(404).json({ message: "Voter not found" });
+        }
+
+        // Voter found, send response
+        res.status(200).json(voter);
+    } catch (err) {
+        next(err);
+    }
+};
+
+// // Get all voters
+// const getAllVoters = async (req, res, next) => {
+//     try {
+//         // Retrieve all voters from repository
+//         const voters = await voterRepository.getAllVoters();
+
+//         // Send the list of voters in the response
+//         res.status(200).json(voters);
+//     } catch (err) {
+//         next(err);
+//     }
+// };
+
+// Get all voters with pagination
+const getAllVoters = async (req, res, next) => {
+    try {
+        // Extract page number from query parameters, default to 1 if not provided
+        const page = parseInt(req.query.page) || 1;
+        // Define the number of voters per page
+        const limit = 10;
+        // Calculate the offset based on the page number and limit
+        const offset = (page - 1) * limit;
+
+        // Retrieve voters from repository with pagination
+        const { voters, totalCount } = await voterRepository.getAllVotersWithPagination(offset, limit);
+
+        // Calculate the total number of pages
+        const totalPages = Math.ceil(totalCount / limit);
+
+        // Create an index for each voter object
+        const votersWithIndex = voters.map((voter, index) => ({
+            index: index + 1 + offset, // Calculate the index based on the offset and current index
+            voter: voter
+        }));
+
+        // Send the paginated list of voters with index in the response
+        res.status(200).json({
+            voters: votersWithIndex,
+            page: page,
+            totalPages: totalPages,
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
-    addVoter, updateVoter, deleteVoter,searchVoter
+    addVoter, updateVoter, deleteVoter,searchVoter, getVoterById,getAllVoters
 };
