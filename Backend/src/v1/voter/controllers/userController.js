@@ -1,11 +1,11 @@
 // controllers/userController.js
-
+const bcrypt = require('bcrypt');
 const userRepository = require('../repositories/userRepository');
 
 // Register a new user
 const registerUser = async (req, res, next) => {
     try {
-        const { username, email, password } = req.body;
+        let { username, email, password } = req.body;
 
         // Ensure User collection exists
         await userRepository.ensureUserCollection();
@@ -15,7 +15,7 @@ const registerUser = async (req, res, next) => {
         if (existingUser) {
             return res.status(400).json({ message: "User already exists!" });
         }
-
+        password = await bcrypt.hash(password , 10);
         // Create a new user
         const newUser = await userRepository.registerUser({ username, email, password });
         res.status(201).json({ message: "User registered successfully!" });
@@ -24,6 +24,20 @@ const registerUser = async (req, res, next) => {
     }
 };
 
+const loginUser = async (req , res , next) => {
+    const { email , password } = req.body;
+    const CheckexistingUser = await userRepository.loginUser(email , password);
+    if (CheckexistingUser == true) {
+        res.status(200).send("the password is correct , welcome ")
+    } else res.status(400).send("Invalid credentials")
+}
+
+
+// logout user 
+
+
+
 module.exports = {
-    registerUser
+    registerUser,
+    loginUser
 };
