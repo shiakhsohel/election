@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up</title>
+    <link rel="stylesheet" href="vm.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="login-box">
+                <div class="language-switch">
+                    <button>Change language button</button>
+                </div>
+                <form id="login-form" class="login-form">
+                    <h2>Log In</h2>
+                    <input type="email" id="login-email" placeholder="Your email" required>
+                    <span class="error-message" id="login-email-error"></span>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <span class="error-message" id="login-password-error"></span>
+                    <button type="submit">Log in</button>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                    <p>Dont have an account? <a href="#">Sign Up</a></p>
+                </form>
+            </div>
+            <blockquote>
+                <p>The future belongs to those who <strong>believe</strong> in the beauty of their dreams.</p>
+                <cite>- Eleanor Roosevelt</cite>
+            </blockquote>
+        </div>
+
+        <div class="right">
+            <blockquote>
+                <p>The only way to do great work is to <strong>love</strong> what you do.</p>
+                <cite>- Steve Jobs</cite>
+            </blockquote>
+            <div class="signup-box">
+                <form id="signup-form" class="signup-form">
+                    <h2>Sign Up</h2>
+                    <input type="email" id="signup-email" placeholder="Your email" required>
+                    <span class="error-message" id="signup-email-error"></span>
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                    <span class="error-message" id="signup-password-error"></span>
+                    <input type="password" id="signup-repeat-password" placeholder="Repeat Password" required>
+                    <span class="error-message" id="signup-repeat-password-error"></span>
+                    <button type="submit">Sign up</button>
+                    <p>Already have an account? <a href="#">Log in</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Login form validation
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            let email = document.getElementById('login-email');
+            let password = document.getElementById('login-password');
+            let emailError = document.getElementById('login-email-error');
+            let passwordError = document.getElementById('login-password-error');
+            
+            // Clear previous errors
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            
+            let valid = true;
+
+            // Email validation
+            if (!validateEmail(email.value)) {
+                emailError.textContent = 'Please enter a valid email address.';
+                valid = false;
+            }
+
+            // Password validation (non-empty)
+            if (password.value.length < 6) {
+                passwordError.textContent = 'Password must be at least 6 characters long.';
+                valid = false;
+            }
+
+            if (valid) {
+                alert('Login successful');
+              
+            }
+        });
+
+        // Signup form validation
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let email = document.getElementById('signup-email');
+            let password = document.getElementById('signup-password');
+            let repeatPassword = document.getElementById('signup-repeat-password');
+            let emailError = document.getElementById('signup-email-error');
+            let passwordError = document.getElementById('signup-password-error');
+            let repeatPasswordError = document.getElementById('signup-repeat-password-error');
+
+            // Clear previous errors
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            repeatPasswordError.textContent = '';
+
+            let valid = true;
+
+            // Email validation
+            if (!validateEmail(email.value)) {
+                emailError.textContent = 'Please enter a valid email address.';
+                valid = false;
+            }
+
+            // Password validation (minimum length 6)
+            if (password.value.length < 6) {
+                passwordError.textContent = 'Password must be at least 6 characters long.';
+                valid = false;
+            }
+
+            // Password match validation
+            if (password.value !== repeatPassword.value) {
+                repeatPasswordError.textContent = 'Passwords do not match.';
+                valid = false;
+            }
+
+            if (valid) {
+                alert('Signup successful');
+        
+            }
+        });
+
+    </script>
+</body>
+</html>
