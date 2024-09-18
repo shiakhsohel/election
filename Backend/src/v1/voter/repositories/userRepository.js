@@ -1,5 +1,5 @@
 // repositories/userRepository.js
-
+const bcrypt = require('bcrypt');
 const User = require('../../../../models/user');
 
 // Check if User collection exists, if not, create it
@@ -20,8 +20,27 @@ const registerUser = async (userData) => {
     return await newUser.save();
 };
 
+const loginUser = async (email, password)=> {
+    try {
+        const existingUser = await findUserByEmail(email);
+            if (existingUser) {
+                bcrypt.compare(password, existingUser.password , async function(err, result) {
+                    return result
+                    // true or false 
+                });
+            }
+     
+    } catch (error) {
+       console.log(error)
+    }
+}
+
 module.exports = {
     ensureUserCollection,
     findUserByEmail,
-    registerUser
+    registerUser,
+    loginUser
 };
+
+
+
