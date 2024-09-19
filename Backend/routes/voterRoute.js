@@ -1,4 +1,6 @@
 // routes/voterRoute.js
+// this is the admin functionality 
+// admin has the right to add voter , remov voter
 
 const express = require('express');
 const router = express.Router();

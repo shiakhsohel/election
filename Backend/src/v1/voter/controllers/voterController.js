@@ -102,6 +102,42 @@ const searchVoter = async (req, res, next) => {
     }
 };
 
+// search the voter by the EPIC number 
+
+const searchByEpicNumber = async (req, res, next) => {
+    try {
+        const epicNumber = req.query.epicNumber
+        const user = await voterRepository.searchVoter(epicNumber)
+        res.status(200).json(user) 
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}
+
+const searchByName = async (req, res, next) => {
+    try {
+        const name = req.query.name
+        const user = await voterRepository.searchVoter(name)
+        res.status(200).json(user) 
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}
+
+
+
+const searchByphoneNumber = async (req, res, next) => {
+    try {
+        const number = req.query.number
+        const user = await voterRepository.searchVoter(number)
+        res.status(200).json(user) 
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}
+
+
+
 // Get a voter by ID
 const getVoterById = async (req, res, next) => {
     try {
@@ -170,5 +206,5 @@ const getAllVoters = async (req, res, next) => {
 };
 
 module.exports = {
-    addVoter, updateVoter, deleteVoter,searchVoter, getVoterById,getAllVoters
+    addVoter, updateVoter, deleteVoter,searchVoter,searchByphoneNumber ,  getVoterById,getAllVoters , searchByEpicNumber , searchByName
 };
