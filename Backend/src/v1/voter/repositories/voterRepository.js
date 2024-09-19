@@ -52,7 +52,9 @@ const searchVoter = async (searchString) => {
             $or: [
                 { 'name': { $regex: searchString, $options: 'i' } }, // Case-insensitive search by name
                 { 'phoneNumber': { $regex: searchString } }, // Search by phone number
-                { 'address': { $regex: searchString, $options: 'i' } } // Case-insensitive search by address
+                { 'address': { $regex: searchString, $options: 'i' } } ,                 // Case-insensitive search by address
+                { 'epicNumber': { $regex: searchString } , $options: 'i' }
+                
                 // Add more fields as needed for universal search
             ]
         });
