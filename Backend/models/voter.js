@@ -51,6 +51,10 @@ const voterSchema = new mongoose.Schema({
     timeOfPoll: {
         type: String,
         required: true
+    }, 
+    phoneNumber: {
+        type: String,
+        required: true
     }
 });
 
