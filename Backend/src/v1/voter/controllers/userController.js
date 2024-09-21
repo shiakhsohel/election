@@ -31,9 +31,9 @@ const registerUser = async (req, res, next) => {
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const CheckexistingUser = await userRepository.loginUser(email, password);
+  const checkExistingUser = await userRepository.loginUser(email, password);
 
-  if (CheckexistingUser == true) {
+  if (checkExistingUser == true) {
     res.status(200).send("the password is correct , welcome ");
   } else res.status(400).send("Invalid credentials");
 };
