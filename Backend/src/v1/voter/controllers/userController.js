@@ -34,8 +34,8 @@ const loginUser = async (req, res, next) => {
   const checkExistingUser = await userRepository.loginUser(email, password);
 
   if (checkExistingUser == true) {
-    res.status(200).send("the password is correct , welcome ");
-  } else res.status(400).send("Invalid credentials");
+    res.status(200).json({ message: "the password is correct , welcome " });
+  } else res.status(400).json({ message: "Invalid credentials"});
 };
 
 // logout user
