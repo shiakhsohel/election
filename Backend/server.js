@@ -4,8 +4,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const userRoute = require('./routes/userRoutes'); // Add this line
-const voterRoute = require('./routes/voterRoute')
+const cors = require('cors');
+const userRoute = require('./routes/userRoutes'); 
+const voterRoute = require('./routes/voterRoute');
 
 dotenv.config();
 
@@ -19,6 +20,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Middleware
 app.use(express.json());
+app.use(cors({
+    origin: process.env.FRONTEND_URL
+}))
 
 // Routes
 app.use('/api/users', userRoute); // Use userRoute
