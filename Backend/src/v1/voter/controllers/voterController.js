@@ -116,20 +116,19 @@ const searchVoter = async (req, res, next) => {
 
 // search the voter by the EPIC number
 
-// const searchByEpicNumber = async (req, res, next) => {
-// <<<<<<< userSearchRoutes
-//     try {
-//         const epicNumber = req.query.epicNumber
-//         const isPlainNum = /^\d+$/.test(epicNumber)
-//         if(!isPlainNum) {
-//             res.status(400).json("please enter a valid number ")
-//         }
-//         const user = await voterRepository.searchVoter(epicNumber)
-//         res.status(200).json(user) 
-//     } catch (error) {
-//         res.status(400).json(error)
-//     }
-// }
+const searchByEpicNumber = async (req, res, next) => {
+    try {
+        const epicNumber = req.query.epicNumber
+        const isPlainNum = /^\d+$/.test(epicNumber)
+        if(!isPlainNum) {
+            res.status(400).json("please enter a valid number ")
+        }
+        const user = await voterRepository.searchVoter(epicNumber)
+        res.status(200).json(user) 
+    } catch (error) {
+        res.status(400).json(error)
+    }
+};
 
 // const searchByName = async (req, res, next) => {
 //     try {
@@ -153,46 +152,36 @@ const searchVoter = async (req, res, next) => {
 
 
 
-// const searchByphoneNumber = async (req, res, next) => {
-//     try {
-//         const number = req.query.number
-//         const isNumber = /^\d+$/.test(number);  
-//         const isAlphabet = /^[a-zA-Z]+$/.test(number);
-//         // check whether a number or an alphabet 
-//         if (isAlphabet) {
-//             res.status(400).json("please type a number ")
-//         }
-//         // checking if the above is a valid number 
-//         if (!isNumber) {
-//             res.status(400).json("please type a valid number ")
-//         }
-//         const user = await voterRepository.searchVoter(number)
-//         res.status(200).json(user) 
-//     } catch (error) {
-//         res.status(400).json(error)
-//     }
-// }
+const searchByphoneNumber = async (req, res, next) => {
+    try {
+        const number = req.query.number
+        const isNumber = /^\d+$/.test(number);  
+        const isAlphabet = /^[a-zA-Z]+$/.test(number);
+        // check whether a number or an alphabet 
+        if (isAlphabet) {
+            res.status(400).json("please type a number ")
+        }
+        // checking if the above is a valid number 
+        if (!isNumber) {
+            res.status(400).json("please type a valid number ")
+        }
+        const user = await voterRepository.searchVoter(number)
+        res.status(200).json(user) 
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}
 
 
-// =======
-//   try {
-//     const epicNumber = req.query.epicNumber;
-//     const user = await voterRepository.searchVoter(epicNumber);
-//     res.status(200).json(user);
-//   } catch (error) {
-//     res.status(400).json(error);
-//   }
-// };
-
-// const searchByName = async (req, res, next) => {
-//   try {
-//     const name = req.query.name;
-//     const user = await voterRepository.searchVoter(name);
-//     res.status(200).json(user);
-//   } catch (error) {
-//     res.status(400).json(error);
-//   }
-// };
+const searchByName = async (req, res, next) => {
+  try {
+    const name = req.query.name;
+    const user = await voterRepository.searchVoter(name);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
 
 // const searchByphoneNumber = async (req, res, next) => {
 //   try {
