@@ -1,5 +1,5 @@
 // routes/index.js
-// this is the userSearch functionality wale routes 
+// this is the userSearch functionality wale routes , humare user ka hai 
 
 const express = require('express');
 const router = express.Router();
